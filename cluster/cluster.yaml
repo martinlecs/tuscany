@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../hack/empty-schema.json
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: single-node
+nodes:
+  - role: control-plane
+networking:
+  disableDefaultCNI: true
+  kubeProxyMode: "none"

@@ -1,0 +1,21 @@
+repositories:
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
+  - name: headlamp
+    url: https://kubernetes-sigs.github.io/headlamp/
+
+releases:
+  # https://github.com/kubernetes-sigs/metrics-server/tree/master/charts/metrics-server
+  - name: metrics-server
+    namespace: kube-system
+    chart: metrics-server/metrics-server
+    version: ~3.12.2
+    set:
+      - name: args[0]
+        value: --kubelet-insecure-tls
+
+  # https://github.com/kubernetes-sigs/headlamp/tree/main/charts/headlamp
+  - name: headlamp
+    namespace: monitoring
+    chart: headlamp/headlamp
+    version: ~0.30.1

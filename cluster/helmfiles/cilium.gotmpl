@@ -1,0 +1,30 @@
+repositories:
+  - name: cilium
+    url: https://helm.cilium.io
+
+releases:
+  - name: cilium
+    namespace: kube-system
+    chart: cilium/cilium
+    version: ~1.17.4
+    set:
+      - name: image.pullPolicy
+        value: IfNotPresent
+      - name: ipam.mode
+        value: cluster-pool
+      - name: operator.replicas
+        value: 1
+      - name: k8sServiceHost
+        value: {{ requiredEnv "CONTROL_PLANE_IP" }} # control-plane ip from docker network bridge
+      - name: k8sServicePort
+        value: 6443
+      - name: kubeProxyReplacement
+        value: true
+      - name: gatewayAPI.enabled
+        value: true
+      - name: ipam.operator.clusterPoolIPv4PodCIDRList[0]
+        value: 10.244.0.0/16 # kind defaults
+      - name: hubble.relay.enabled
+        value: true
+      - name: hubble.ui.enabled
+        value: true

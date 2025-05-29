@@ -1,0 +1,13 @@
+{
+    "servers": {
+        // https://github.com/GoogleCloudPlatform/kubectl-ai
+        "kubectl-ai": {
+            "type": "stdio",
+            "command": "/usr/local/bin/kubectl-ai",
+            "args": [
+                "--mcp-server"
+            ],
+            "env": {}
+        }
+    }
+}

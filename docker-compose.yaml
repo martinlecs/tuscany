@@ -1,0 +1,29 @@
+services:
+  caddy-reverse-proxy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # https://github.com/kubernetes-sigs/cloud-provider-kind
+  cloud-provider-kind:
+    image: registry.k8s.io/cloud-provider-kind/cloud-controller-manager:v0.6.0
+    network_mode: kind
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: ["/bin/cloud-provider-kind", "-enable-lb-port-mapping"]
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  default:
+    external: true
+    name: kind
