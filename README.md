@@ -1,7 +1,7 @@
 # Tuscany
 A hands-on guide to setting up a local, operations-ready Kubernetes cluster for new devs.
 
-<img src="./logo.png" width="100">
+<img src="assets/logo.png" width="100">
 
 ----
 
@@ -50,6 +50,7 @@ make start
 ## To start your local cluster
 
 ```
-    docker cp tuscany-caddy-reverse-proxy-1:/data/caddy/pki/authorities/local/root.crt root.crt
-    certutil -addstore -f "ROOT" root.crt
+    docker cp tuscany-caddy-reverse-proxy-1:/data/caddy/pki/authorities/local/root.crt root.crt; certutil -addstore -f "ROOT" root.crt ; rm root.crt
+
+    docker compose exec -w /etc/caddy caddy-reverse-proxy caddy reload
 ```
