@@ -5,7 +5,7 @@ import "holos.example/config/flux"
 Component: {
 
 	// Ensure resources go in the correct namespace
-	Resources: [_]: [_]: metadata: namespace: flux.config.namespace
+	// Resources: [_]: [_]: metadata: namespace: flux.config.namespace
 	
 	Resources: {
 		Namespace: {
@@ -18,6 +18,7 @@ Component: {
 		FluxInstance: {
 			Flux: {
 			metadata: name: "flux"
+			metadata: namespace: flux.config.namespace
 			spec: {
 				distribution: {
 					version: "2.6.1"
@@ -38,12 +39,5 @@ Component: {
 				}
 			}}
 		}
-
-		// Bucket: "minio-bucket": {
-		// 	metadata: name: "minio-bucket"
-		// 	spec: {
-				
-		// 	}
-		// }
 	}
 }

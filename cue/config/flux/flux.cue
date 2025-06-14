@@ -1,14 +1,10 @@
 package flux
 
 #FluxConfig: {
-    config: {
-        namespace: string
-    }
+    namespace: string
 }
 
 // TODO: syntax server
-flux: #FluxConfig & {
-    config: {
-	    namespace: "flux-system"
-    }
+config: #FluxConfig & {
+    namespace: "flux-system"
 }
