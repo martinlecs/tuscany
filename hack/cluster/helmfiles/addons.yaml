@@ -1,10 +1,18 @@
 repositories:
   - name: metrics-server
     url: https://kubernetes-sigs.github.io/metrics-server/
+
   - name: headlamp
     url: https://kubernetes-sigs.github.io/headlamp/
 
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+
 releases:
+  # think about install argocd when I have time
+
+  # just install vault
+
   # https://github.com/kubernetes-sigs/metrics-server/tree/master/charts/metrics-server
   - name: metrics-server
     namespace: kube-system
@@ -19,3 +27,12 @@ releases:
     namespace: monitoring
     chart: headlamp/headlamp
     version: ~0.30.1
+
+  # https://grafana.github.io/grafana-operator/docs
+  - name: grafana-operator
+    namespace: monitoring
+    chart: grafana/grafana-operator
+    version: ~5.18.0
+    set:
+      - name: dashboard.enabled
+        value: true

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=hack/empty.schema.json
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kind
+nodes:
+  - role: control-plane
+    labels:
+      "kind.node/label": control-plane
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: ClusterConfiguration
+    #     apiServer:
+    #       extraArgs:
+    #         audit-policy-file: /etc/kubernetes/policies/audit-policy.yaml
+    #         audit-log-path: /var/log/kubernetes/kube-apiserver-audit.log
+    #       extraVolumes:
+    #         - name: audit-policies
+    #           hostPath: /etc/kubernetes/policies
+    #           mountPath: /etc/kubernetes/policies
+    #           readOnly: true
+    #           pathType: DirectoryOrCreate
+    #         - name: audit-log
+    #           hostPath: /var/log/kubernetes
+    #           mountPath: /var/log/kubernetes
+    #           readOnly: false
+    #           pathType: DirectoryOrCreate
+    # extraMounts:
+    #   - hostPath: kind/audit-policy.yaml
+    #     containerPath: /etc/kubernetes/policies/audit-policy.yaml
+    #     readOnly: true
+    #   - hostPath: kind/kindnet-daemonset.yaml
+    #     containerPath: /kind/manifests/default-cni.yaml
+    #     readOnly: false
+  - role: worker
+    labels:
+      "kind.node/label": worker

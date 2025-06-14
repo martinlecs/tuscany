@@ -1,5 +1,6 @@
 services:
-  caddy-reverse-proxy:
+  reverse-proxy:
+    container_name: reverse-proxy
     image: caddy:latest
     restart: unless-stopped
     ports:
@@ -14,10 +15,10 @@ services:
   # https://github.com/kubernetes-sigs/cloud-provider-kind
   cloud-provider-kind:
     image: registry.k8s.io/cloud-provider-kind/cloud-controller-manager:v0.6.0
-    network_mode: kind
+    restart: unless-stopped
+    entrypoint: ["/bin/cloud-provider-kind", "-enable-lb-port-mapping"]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    entrypoint: ["/bin/cloud-provider-kind", "-enable-lb-port-mapping"]
 
 volumes:
   caddy_data:
@@ -26,4 +27,4 @@ volumes:
 networks:
   default:
     external: true
-    name: kind
+    name: tuscany
